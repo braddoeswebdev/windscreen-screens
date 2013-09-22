@@ -13,10 +13,10 @@
       <div id="label">Now Serving:</div>
       <button onClick="inc()">+</button> 
       <button onClick="dec();">-</button> 
-      <div id="counter">00</div>
+      <div id="counter"><%= @counter.to_s.rjust(2,'0') %></div>
     </div>
     <script type="text/javascript">
-      var ctr = 0;
+      var ctr = <%= @counter %>;
 
       function inc() {
         ctr++;

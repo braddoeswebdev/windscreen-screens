@@ -11,11 +11,11 @@
   <body>
     <div id="main">
       <div id="label">Now Serving:</div>
-      <div id="counter">00</div>
+      <div id="counter"><%= @counter.to_s.rjust(2,'0') %></div>
     </div>
 
     <script>
-      var ctr = 0;
+      var ctr = <%= @counter %>;
       var es = new EventSource('<%= url 'stream' %>');
       var me;
       es.onmessage = function(e) {
