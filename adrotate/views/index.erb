@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="<%= url 'app.css' %>" rel="stylesheet" type="text/css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <body onload="init()">
+        <div id="main">
+            <div id="bannerContainer">
+                <% @ads.each do |ad| %>
+                    <div class="ad">
+                        <img src="<%= url "img/#{ad}" %>" width="240" height="96"/>
+                    </div>
+                <% end %>
+                <div class="ad">
+                    <img src="<%= url "img/#{@ads[0]}" %>" width="240" height="96"/>
+                </div>
+            </div>	
+        </div>
+
+        <script>
+            var es = new EventSource('<%= url 'stream' %>');
+            var me;
+            es.onmessage = function(e) {
+                $("#data").html(e.data);
+            }
+        </script>
+
+        <script>
+            var count = <%= @ads.length %>;
+            var ctr = <%= @current %>;
+
+            function init() {
+                var offset = 0;
+                for(var i = 0; i < ctr; i++) {
+                    offset += 96;
+                }
+                $('#bannerContainer').animate({top: '-='+offset}, 0);
+            }
+            function slideDown() {
+                $('#bannerContainer').animate({top: '-=96'}, 1000);
+            }
+
+            function slideToTop() {
+                $('#bannerContainer').animate({top: '0'}, 0);
+            }
+
+            function timerTick() {
+                ctr++;
+                slideDown();
+                if(ctr == count) {
+                    slideToTop();
+                    ctr = 0;
+                }
+                $.post('<%= url 'post' %>', {ctr: ctr});
+            }
+
+            window.setInterval(function() { timerTick(); }, 11000);
+        </script>
+    </body>
+</html>

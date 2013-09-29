@@ -1,0 +1,34 @@
+#main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 96px;
+  background-color: #222;
+  color: #ddd;
+  font-family: "DisposableDroid BB", monospace;
+  text-align: center;
+}
+
+#bannerContainer {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #ff0;
+}
+
+.ad {
+	padding: 0px;
+	margin: 0px;
+	height: 96px;
+	width: 240px;
+}
+
+img {
+	padding: 0px;
+	margin: 0px;
+	height: 96px;
+	width: 240px;
+}
+
+

@@ -17,3 +17,7 @@ end
 map '/img' do
   run StaticImageScreen
 end
+
+map '/adrotate' do
+  run AdRotatorScreen
+end
